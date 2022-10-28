@@ -135,6 +135,10 @@ func (s *BaseSerializer) GetID(topic string, msg interface{}, info schemaregistr
 	useLatest := s.Conf.UseLatestVersion
 	normalizeSchema := s.Conf.NormalizeSchemas
 
+	fmt.Printf("\n\n useLatest: %v, normalizeSchema: %v, useSchemaID: %v \n\n",
+		useLatest, normalizeSchema, useSchemaID,
+	)
+
 	var id = -1
 	subject, err := s.SubjectNameStrategy(topic, s.SerdeType, info)
 	if err != nil {
@@ -172,6 +176,7 @@ func (s *BaseSerializer) GetID(topic string, msg interface{}, info schemaregistr
 			return -1, err
 		}
 	} else {
+		fmt.Printf("\n\nGetting ID by client\n\n")
 		id, err = s.Client.GetID(subject, info, normalizeSchema)
 		if err != nil {
 			return -1, err

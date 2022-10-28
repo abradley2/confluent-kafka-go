@@ -18,6 +18,7 @@ package jsonschema
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"strings"
 
@@ -70,7 +71,7 @@ func (s *Serializer) Serialize(topic string, msg interface{}) ([]byte, error) {
 	}
 	id, err := s.GetID(topic, msg, info)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error calling GetID: %w", err)
 	}
 	raw, err = json.Marshal(msg)
 	if err != nil {

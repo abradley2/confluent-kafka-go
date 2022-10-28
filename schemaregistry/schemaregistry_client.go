@@ -340,6 +340,7 @@ func (c *client) GetBySubjectAndID(subject string, id int) (schema SchemaInfo, e
 
 // GetID checks if a schema has been registered with the subject. Returns ID if the registration can be found
 func (c *client) GetID(subject string, schema SchemaInfo, normalize bool) (id int, err error) {
+	// TODO: fuckery here
 	schemaJSON, err := schema.MarshalJSON()
 	if err != nil {
 		return -1, err
